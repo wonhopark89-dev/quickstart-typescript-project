@@ -276,3 +276,6 @@ modules.xml
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/yarn,node,webstorm+all,visualstudiocode,macos
+
+# typescript out dir
+/build
