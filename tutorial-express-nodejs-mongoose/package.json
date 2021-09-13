@@ -1,0 +1,6 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "source/server.ts",
+  "license": "MIT"
+}
