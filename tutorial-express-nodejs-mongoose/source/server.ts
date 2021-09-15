@@ -3,10 +3,21 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import logging from './config/logging';
 import config from './config/config';
-import sampleRoutes, { route } from './routes/sample';
+import bookRoutes, { route } from './routes/book';
+import mongoose from 'mongoose';
 
 const NAMESPACE = 'Server';
 const router = express();
+
+/** Connect to Mongo */
+mongoose
+  .connect(config.mongo.url, config.mongo.options)
+  .then((result) => {
+    logging.info(NAMESPACE, 'Connected to MongoDB!');
+  })
+  .catch((error) => {
+    logging.error(NAMESPACE, error.message, error);
+  });
 
 /** Log the request */
 router.use((req, res, next) => {
@@ -43,7 +54,7 @@ router.use((req, res, next) => {
 });
 
 /** Routes */
-router.use('/sample', sampleRoutes);
+router.use('/api/books', bookRoutes);
 
 /** Error Handling */
 router.use((req, res, next) => {
@@ -54,5 +65,5 @@ router.use((req, res, next) => {
 /** Create the Server */
 const httpServer = http.createServer(router);
 httpServer.listen(config.server.port, () =>
-  logging.info(NAMESPACE, `Server running on ${config.server.hostname}:${config.server.hostname}`)
+  logging.info(NAMESPACE, `Server running on ${config.server.hostname}:${config.server.port}`)
 );
