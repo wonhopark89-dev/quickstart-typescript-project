@@ -1,0 +1,44 @@
+const DEFAULT_NAMESPACE = 'Client';
+
+const getTimeStamp = (): string => {
+  return new Date().toISOString();
+};
+
+const info = (message: string, object?: any) => {
+  if (object) {
+    console.info(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}] [INFO] ${message}`, object);
+  } else {
+    console.info(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}] [INFO] ${message}`);
+  }
+};
+
+const warn = (message: string, object?: any) => {
+  if (object) {
+    console.info(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}] [WARN] ${message}`, object);
+  } else {
+    console.info(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}] [WARN]] ${message}`);
+  }
+};
+
+const error = (message: string, object?: any) => {
+  if (object) {
+    console.info(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}] [ERROR] ${message}`, object);
+  } else {
+    console.info(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}] [ERROR] ${message}`);
+  }
+};
+
+const debug = (message: string, object?: any) => {
+  if (object) {
+    console.info(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}] [DEBUG] ${message}`, object);
+  } else {
+    console.info(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}][DEBUG] ${message}`);
+  }
+};
+
+export default {
+  info,
+  warn,
+  error,
+  debug
+};
