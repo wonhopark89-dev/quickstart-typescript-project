@@ -20,7 +20,7 @@ const  config = {
         }
 };
 ```
-
+------
 ## server
 
 ```
@@ -50,3 +50,7 @@ server/src/config/serviceAccountKey.json
 ```
 same as firebase private key
 ```
+---
+### global npm install
+```npm install -g ts-node-dev```  
+-> ts-node-dev src/server.ts
