@@ -9,8 +9,10 @@
   },
   "[markdown]": {
     "editor.formatOnSave": true,
-    "editor.wordWrap": "on",
+    "editor.wordWrap": "off",
     "editor.renderWhitespace": "all",
     "editor.quickSuggestions": false
-  }
+  },
+  "prettier.printWidth": 120,
+  "prettier.requireConfig": true
 }
