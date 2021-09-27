@@ -9,7 +9,7 @@ import { Providers } from '../config/firebase';
 import logging from '../config/logging';
 import UserContext from '../contexts/user';
 import IPageProps from '../interfaces/page';
-import { SignInWithSocialMedia as SocialMediaPopup } from '../modules/auth';
+import { Authenticate, SignInWithSocialMedia as SocialMediaPopup } from '../modules/auth';
 
 const LoginPage: React.FunctionComponent<IPageProps> = props => {
     const [authentication, setAuthentication] = useState<boolean>(false);
@@ -37,6 +37,16 @@ const LoginPage: React.FunctionComponent<IPageProps> = props => {
                     try {
                         let fire_token = await user.getIdToken();
                         /** if we get a token, auth with the backend */
+                        Authenticate(uid, name, fire_token, (error, _user) => {
+                            // underscore user is our user, ( _user )
+                            if (error) {
+                                setError(error);
+                                setAuthentication(false);
+                            } else if (_user) {
+                                userContext.userDispatch({ type: "login", payload: { user: _user, fire_token } });
+                                history.push("/");
+                            }
+                        });
                     } catch (error) {
                         setError("Invalid token.");
                         logging.error(JSON.stringify(error)); // Fixme: tsc error, TS2345

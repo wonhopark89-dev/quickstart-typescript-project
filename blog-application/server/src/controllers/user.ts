@@ -91,7 +91,21 @@ const read = (req: Request, res: Response, next: NextFunction) => {
       });
     });
 };
-const readAll = (req: Request, res: Response, next: NextFunction) => {};
+const readAll = (req: Request, res: Response, next: NextFunction) => {
+  logging.info(`Incoming read all ...`);
+
+  return User.find()
+    .exec()
+    .then((users) => {
+      return res.status(200).json({ count: users.length, users });
+    })
+    .catch((error) => {
+      logging.error(error);
+      return res.status(500).json({
+        error
+      });
+    });
+};
 
 export default {
   validate,
