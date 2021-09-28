@@ -5,7 +5,8 @@ import config from './config/config';
 import mongoose from 'mongoose';
 import firebaseAdmin from 'firebase-admin';
 //
-import userRoutes from './routes/user';
+import userRoutes, { route } from './routes/user';
+import blogRoutes from './routes/blog';
 
 const router = express();
 
@@ -59,6 +60,7 @@ router.use((req, res, next) => {
 
 /** Routes */
 router.use('/users', userRoutes);
+router.use('/blogs', blogRoutes);
 
 /** Error handling */
 router.use((req, res, next) => {
