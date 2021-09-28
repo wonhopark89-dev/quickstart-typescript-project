@@ -35,7 +35,12 @@ const read = (req: Request, res: Response, next: NextFunction) => {
   const _id = req.params.blogID;
   logging.info(`Incoming read for ${_id} ...`);
 
+  /**
+   * author in clinet, need populate because that, 
+   * ( author={(blog.author as IUser).name} )
+   */
   return Blog.findById(_id)
+    .populate('author')
     .then((blog) => {
       if (blog) {
         return res.status(200).json({ blog });
@@ -55,6 +60,7 @@ const readAll = (req: Request, res: Response, next: NextFunction) => {
   logging.info(`Incoming read all ...`);
 
   return Blog.find()
+    .populate('author')
     .exec()
     .then((blogs) => {
       return res.status(200).json({ count: blogs.length, blogs });
@@ -71,6 +77,7 @@ const query = (req: Request, res: Response, next: NextFunction) => {
   logging.info(`Incoming query ...`);
 
   return Blog.find(req.body)
+    .populate('author')
     .exec()
     .then((blogs) => {
       return res.status(200).json({ count: blogs.length, blogs });
