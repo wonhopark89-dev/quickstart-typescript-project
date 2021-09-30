@@ -77,17 +77,26 @@ const Application: React.FunctionComponent<IApplicationProps> = props => {
                 {routes.map((route, index) => {
                     // 각 라우터들의 Auth 를 체크
                     if (route.auth) {
-                        <Route key={index} exact={route.exact} path={route.path}
-                            render={(routeProps: RouteChildrenProps<any>) =>
-                                <AuthRoute>
-                                    <route.component {...routeProps} />
-                                </AuthRoute>
-                            }
-                        />;
+                        // double check
+                        return (
+                            <Route
+                                key={index}
+                                exact={route.exact}
+                                path={route.path}
+                                render={(routeProps: RouteChildrenProps<any>) =>
+                                    <AuthRoute>
+                                        <route.component {...routeProps} />
+                                    </AuthRoute>
+                                }
+                            />
+                        );
                     }
 
                     return (
-                        <Route key={index} exact={route.exact} path={route.path}
+                        <Route
+                            key={index}
+                            exact={route.exact}
+                            path={route.path}
                             render={(routeProps: RouteChildrenProps<any>) =>
                                 <route.component {...routeProps} />}
                         />

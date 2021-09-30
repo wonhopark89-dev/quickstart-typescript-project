@@ -109,13 +109,17 @@ const EditPage: React.FunctionComponent<IPageProps & RouteComponentProps<any>> =
                 data: {
                     title,
                     picture,
-                    headeline: headline,
+                    headline,
                     content,
                     author: user._id
                 }
             });
 
-            if (response.status === 201) {
+
+            logging.info(JSON.stringify(response.status));
+
+            if (response.status === 201 || response.status === 200) {
+                logging.info(JSON.stringify(response.data.blog));
                 setId(response.data.blog._id);
                 setSuccess("Blog posted. You can continue to edit it on thie page");
             } else {
@@ -245,6 +249,7 @@ const EditPage: React.FunctionComponent<IPageProps & RouteComponentProps<any>> =
                                 if (_id !== "") {
                                     editBlog();
                                 } else {
+                                    logging.info("create start ....");
                                     createBlog();
                                 }
                             }}
