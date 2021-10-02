@@ -14,25 +14,25 @@ const info = (message: string, object?: any) => {
 
 const warn = (message: string, object?: any) => {
   if (object) {
-    console.info(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}] [WARN] ${message}`, object);
+    console.warn(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}] [WARN] ${message}`, object);
   } else {
-    console.info(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}] [WARN]] ${message}`);
+    console.warn(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}] [WARN]] ${message}`);
   }
 };
 
 const error = (message: string, object?: any) => {
   if (object) {
-    console.info(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}] [ERROR] ${message}`, object);
+    console.error(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}] [ERROR] ${message}`, object);
   } else {
-    console.info(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}] [ERROR] ${message}`);
+    console.error(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}] [ERROR] ${message}`);
   }
 };
 
 const debug = (message: string, object?: any) => {
   if (object) {
-    console.info(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}] [DEBUG] ${message}`, object);
+    console.debug(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}] [DEBUG] ${message}`, object);
   } else {
-    console.info(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}][DEBUG] ${message}`);
+    console.debug(`[${getTimeStamp()}][${DEFAULT_NAMESPACE}][DEBUG] ${message}`);
   }
 };
 

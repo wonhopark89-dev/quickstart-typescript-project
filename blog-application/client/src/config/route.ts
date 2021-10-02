@@ -6,12 +6,12 @@ import LoginPage from '../pages/login';
 
 const authRoutes: IRoute[] = [
   { path: '/login', exact: true, auth: false, component: LoginPage, name: 'Login' },
-  { path: '/register', exact: true, auth: false, component: LoginPage, name: 'Register' }
+  { path: '/register', exact: true, auth: false, component: LoginPage, name: 'Sign Up' }
 ];
 const blogRoutes: IRoute[] = [
-  { path: '/edit', exact: true, auth: true, component: EditPage, name: 'Edit' },
+  { path: '/edit', exact: true, auth: true, component: EditPage, name: 'Create' },
   { path: '/edit/:blogID', exact: true, auth: true, component: EditPage, name: 'Edit' },
-  { path: '/blogs/:blogID', exact: true, auth: true, component: BlogPage, name: 'Blog' }
+  { path: '/blogs/:blogID', exact: true, auth: false, component: BlogPage, name: 'Blog' }
 ];
 const mainRoutes: IRoute[] = [{ path: '/', exact: true, auth: false, component: HomePage, name: 'Home' }];
 

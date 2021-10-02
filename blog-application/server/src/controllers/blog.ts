@@ -24,7 +24,9 @@ const create = (req: Request, res: Response, next: NextFunction) => {
       return res.status(200).json({ blog: newBlog });
     })
     .catch((error) => {
-      logging.error(error);
+      if (error instanceof Error) {
+        logging.error(error.message, error);
+      }
       return res.status(500).json({
         error
       });
@@ -36,7 +38,7 @@ const read = (req: Request, res: Response, next: NextFunction) => {
   logging.info(`Incoming read for ${_id} ...`);
 
   /**
-   * author in clinet, need populate because that, 
+   * author in client, need populate because that,
    * ( author={(blog.author as IUser).name} )
    */
   return Blog.findById(_id)
@@ -49,7 +51,9 @@ const read = (req: Request, res: Response, next: NextFunction) => {
       }
     })
     .catch((error) => {
-      logging.error(error);
+      if (error instanceof Error) {
+        logging.error(error.message, error);
+      }
       return res.status(500).json({
         error
       });
@@ -66,7 +70,9 @@ const readAll = (req: Request, res: Response, next: NextFunction) => {
       return res.status(200).json({ count: blogs.length, blogs });
     })
     .catch((error) => {
-      logging.error(error);
+      if (error instanceof Error) {
+        logging.error(error.message, error);
+      }
       return res.status(500).json({
         error
       });
@@ -83,7 +89,9 @@ const query = (req: Request, res: Response, next: NextFunction) => {
       return res.status(200).json({ count: blogs.length, blogs });
     })
     .catch((error) => {
-      logging.error(error);
+      if (error instanceof Error) {
+        logging.error(error.message, error);
+      }
       return res.status(500).json({
         error
       });
@@ -106,7 +114,9 @@ const update = (req: Request, res: Response, next: NextFunction) => {
             return res.status(200).json({ blog: newBlog });
           })
           .catch((error) => {
-            logging.error(error);
+            if (error instanceof Error) {
+              logging.error(error.message, error);
+            }
             return res.status(500).json({
               error
             });
@@ -116,7 +126,9 @@ const update = (req: Request, res: Response, next: NextFunction) => {
       }
     })
     .catch((error) => {
-      logging.error(error);
+      if (error instanceof Error) {
+        logging.error(error.message, error);
+      }
       return res.status(500).json({
         error
       });
@@ -131,7 +143,9 @@ const deleteBlog = async (req: Request, res: Response, next: NextFunction) => {
     await Blog.findByIdAndDelete(_id);
     return res.status(200).json({ message: 'Blog deleted' });
   } catch (error) {
-    logging.error(JSON.stringify(error));
+    if (error instanceof Error) {
+      logging.error(error.message, error);
+    }
     return res.status(500).json({
       error
     });

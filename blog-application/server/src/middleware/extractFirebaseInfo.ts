@@ -26,7 +26,9 @@ const extractFirebaseInfo = (req: Request, res: Response, next: NextFunction) =>
         }
       })
       .catch((error) => {
-        logging.error(error);
+        if (error instanceof Error) {
+          logging.error(error.message, error);
+        }
         return res.status(401).json({
           error,
           message: 'unauthorized ...'

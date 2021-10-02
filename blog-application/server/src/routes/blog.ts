@@ -8,6 +8,6 @@ router.get('/read/:blogID', controller.read);
 router.get('/', controller.readAll);
 router.post('/query', controller.query);
 router.patch('/update/:blogID', controller.update);
-router.post('/:blogID', controller.deleteBlog);
+router.delete('/:blogID', controller.deleteBlog);
 
 export = router;

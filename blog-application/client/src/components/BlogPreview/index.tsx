@@ -24,8 +24,8 @@ const BlogPreview: React.FunctionComponent<IBlogPreviewProps> = props => {
                     <h3>{headline}</h3><br />
                 </Link>
                 {createdAt !== updatedAt ?
-                    <p>Updated by {author} at {new Date(updatedAt).toLocaleDateString()}</p>
-                    : <p>Posted by {author} at {new Date(createdAt).toLocaleDateString()}</p>
+                    <p>Updated by {author} at {new Date(updatedAt).toLocaleString()}</p>
+                    : <p>Posted by {author} at {new Date(createdAt).toLocaleString()}</p>
                 }
                 {children}
             </CardBody>

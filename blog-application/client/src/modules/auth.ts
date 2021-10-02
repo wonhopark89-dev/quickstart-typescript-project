@@ -38,7 +38,9 @@ export const Authenticate = async (
       callback('Unable to authentiate', null);
     }
   } catch (error) {
-    logging.error(JSON.stringify(error));
+    if (error instanceof Error) {
+      logging.error(error.message);
+    }
     callback('Unable to authentiate', null);
   }
 };
@@ -60,7 +62,9 @@ export const Validate = async (fire_token: string, callback: (error: string | nu
       callback('Unable to validate', null);
     }
   } catch (error) {
-    logging.error(JSON.stringify(error));
+    if (error instanceof Error) {
+      logging.error(error.message);
+    }
     callback('Unable to validate', null);
   }
 };

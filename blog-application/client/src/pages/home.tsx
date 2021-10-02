@@ -34,7 +34,9 @@ const HomePage: React.FunctionComponent<IPageProps> = props => {
                 setBlogs(blogs);
             }
         } catch (error) {
-            logging.error(JSON.stringify(error));
+            if (error instanceof Error) {
+                logging.error(error.message);
+            }
             setError("Unable to retreive blogs");
         } finally {
             setTimeout(() => {

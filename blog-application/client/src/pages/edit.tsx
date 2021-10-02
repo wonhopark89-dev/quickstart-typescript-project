@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from "react";
 import { EditorState, ContentState, convertToRaw } from 'draft-js';
-import { match, RouteComponentProps, withRouter } from 'react-router';
 import config from '../config/config';
 import logging from '../config/logging';
 import UserContext from '../contexts/user';
@@ -16,14 +15,9 @@ import Header from '../components/Header';
 import ErrorText from '../components/ErrorText';
 import { Editor } from 'react-draft-wysiwyg';
 import SuccessText from '../components/SuccessText';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 // https://github.com/jpuri/react-draft-wysiwyg#getting-started
-
-interface matchProps extends RouteComponentProps {
-
-
-}
 
 const EditPage: React.FunctionComponent<IPageProps & RouteComponentProps<any>> = props => {
     const [_id, setId] = useState<string>("");
@@ -54,6 +48,7 @@ const EditPage: React.FunctionComponent<IPageProps & RouteComponentProps<any>> =
 
     }, []);
 
+
     const getBlog = async (id: string) => {
         try {
             const response = await axios({
@@ -62,7 +57,7 @@ const EditPage: React.FunctionComponent<IPageProps & RouteComponentProps<any>> =
             });
 
             if (response.status === 200 || response.status === 304) {
-                if (user._id !== response.data.author._id) {
+                if (user._id !== response.data.blog.author._id) {
                     logging.warn("This blog is owned by someone else");
                     setId("");
                 } else {
@@ -85,14 +80,18 @@ const EditPage: React.FunctionComponent<IPageProps & RouteComponentProps<any>> =
             }
 
         } catch (error) {
-            setError(JSON.stringify(error));
+            if (error instanceof Error) {
+                setError(error.message);
+            }
+
         } finally {
             setLoading(false);
         }
     };
 
     const createBlog = async () => {
-        if (title === "" || headline === "" || content === "") {
+        // todo : fixme content is emtpy value, as <p></p>
+        if (title === "" || headline === "" || content === "" ||) {
             setError("Please fill out all required forms");
             setSuccess("");
             return null;
@@ -115,15 +114,11 @@ const EditPage: React.FunctionComponent<IPageProps & RouteComponentProps<any>> =
                 }
             });
 
-
-            logging.info(JSON.stringify(response.status));
-
             if (response.status === 201 || response.status === 200) {
-                logging.info(JSON.stringify(response.data.blog));
                 setId(response.data.blog._id);
                 setSuccess("Blog posted. You can continue to edit it on thie page");
             } else {
-                setError("Unable to save blog");
+                setError("Unable to save blogm, on create");
             }
 
         } catch (error) {
@@ -140,6 +135,7 @@ const EditPage: React.FunctionComponent<IPageProps & RouteComponentProps<any>> =
             return null;
         }
 
+        logging.info("content: " + content);
         setError("");
         setSuccess("");
         setSaving(true);
@@ -157,15 +153,18 @@ const EditPage: React.FunctionComponent<IPageProps & RouteComponentProps<any>> =
                 }
             });
 
-            if (response.status === 201) {
+
+            if (response.status === 201 || response.status === 200) {
                 setId(response.data.blog._id);
                 setSuccess("Blog updated.");
             } else {
-                setError("Unable to save blog");
+                setError("Unable to save blog, on edit");
             }
 
         } catch (error) {
-            setError(JSON.stringify(error));
+            if (error instanceof Error) {
+                setError(error.message);
+            }
         } finally {
             setSaving(false);
         }
@@ -266,15 +265,14 @@ const EditPage: React.FunctionComponent<IPageProps & RouteComponentProps<any>> =
                                 to={`/blogs/${_id}`}
                             >
                                 View your blog post!
-                            </Button>}
+                            </Button>
+                        }
                     </FormGroup>
                     <FormGroup>
                         <Label>Preview</Label>
                         <div className="border p-2">
                             <div
-                                dangerouslySetInnerHTML={{
-                                    __html: content
-                                }}
+                                dangerouslySetInnerHTML={{ __html: content }}
                             />
                         </div>
                     </FormGroup>

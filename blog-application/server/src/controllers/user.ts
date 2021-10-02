@@ -20,7 +20,9 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
       }
     })
     .catch((error) => {
-      logging.error(error);
+      if (error instanceof Error) {
+        logging.error(error.message, error);
+      }
       return res.status(500).json({
         error
       });
@@ -44,7 +46,9 @@ const create = (req: Request, res: Response, next: NextFunction) => {
       return res.status(200).json({ user: newUser, fire_token });
     })
     .catch((error) => {
-      logging.error(error);
+      if (error instanceof Error) {
+        logging.error(error.message, error);
+      }
       return res.status(500).json({
         error
       });
@@ -66,7 +70,9 @@ const login = (req: Request, res: Response, next: NextFunction) => {
       }
     })
     .catch((error) => {
-      logging.error(error);
+      if (error instanceof Error) {
+        logging.error(error.message, error);
+      }
       return res.status(500).json({
         error
       });
@@ -85,7 +91,9 @@ const read = (req: Request, res: Response, next: NextFunction) => {
       }
     })
     .catch((error) => {
-      logging.error(error);
+      if (error instanceof Error) {
+        logging.error(error.message, error);
+      }
       return res.status(500).json({
         error
       });
@@ -100,7 +108,9 @@ const readAll = (req: Request, res: Response, next: NextFunction) => {
       return res.status(200).json({ count: users.length, users });
     })
     .catch((error) => {
-      logging.error(error);
+      if (error instanceof Error) {
+        logging.error(error.message, error);
+      }
       return res.status(500).json({
         error
       });

@@ -48,8 +48,10 @@ const LoginPage: React.FunctionComponent<IPageProps> = props => {
                             }
                         });
                     } catch (error) {
+                        if (error instanceof Error) {
+                            logging.error(error.message)
+                          }
                         setError("Invalid token.");
-                        logging.error(JSON.stringify(error)); // Fixme: tsc error, TS2345
                         setAuthentication(false);
                     }
                 } else {
