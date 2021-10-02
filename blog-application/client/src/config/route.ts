@@ -13,7 +13,7 @@ const blogRoutes: IRoute[] = [
   { path: '/edit/:blogID', exact: true, auth: true, component: EditPage, name: 'Edit' },
   { path: '/blogs/:blogID', exact: true, auth: true, component: BlogPage, name: 'Blog' }
 ];
-const mainRoutes: IRoute[] = [{ path: '/', exact: true, auth: true, component: HomePage, name: 'Home' }];
+const mainRoutes: IRoute[] = [{ path: '/', exact: true, auth: false, component: HomePage, name: 'Home' }];
 
 const routes: IRoute[] = [...authRoutes, ...blogRoutes, ...mainRoutes];
 
