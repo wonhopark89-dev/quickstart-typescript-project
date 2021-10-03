@@ -8,7 +8,7 @@
     "name": "wonhopark89-dev"
   },
   "scripts": {
-    "build": "rm -rf build/ && prettier --write source/ && tsc"
+    "build": "rm -rf build && prettier --write source/ && tsc"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
