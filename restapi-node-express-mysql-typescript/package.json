@@ -1,0 +1,8 @@
+{
+  "name": "restapi-mysql",
+  "version": "1.0.0",
+  "description": "NodeJS, Express, Typescript and MySQL",
+  "main": "source/server.ts",
+  "author": "wonhopark89-dev",
+  "license": "MIT"
+}
