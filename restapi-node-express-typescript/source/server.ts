@@ -3,6 +3,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import config from './config/config';
 import logging from './config/logging';
+//
+import sampleRoutes from './routes/sample';
 
 const NAMESPACE = 'Server';
 const router = express();
@@ -31,9 +33,11 @@ router.use((req, res, next) => {
     res.header('Access-Control-Allow-Methods', 'GET PATCH DELETE POST PUT');
     return res.status(200).json({});
   }
+  next();
 });
 
 /** Route */
+router.use('/sample', sampleRoutes);
 
 /** Error Handling */
 router.use((req, res, next) => {
