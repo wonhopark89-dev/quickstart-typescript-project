@@ -4,5 +4,20 @@
   "description": "NodeJS, Express, Typescript and MySQL",
   "main": "source/server.ts",
   "author": "wonhopark89-dev",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "rm -rf build && prettier --write source/ && tsc"
+  },
+  "dependencies": {
+    "@types/mysql": "^2.15.19",
+    "body-parser": "^1.19.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.1",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.13"
+  }
 }
