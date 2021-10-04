@@ -5,6 +5,7 @@ import config from './config/config';
 import logging from './config/logging';
 //
 import bookRoutes from './routes/book';
+import userRoutes from './routes/user';
 
 const NAMESPACE = 'Server';
 const router = express();
@@ -38,6 +39,7 @@ router.use((req, res, next) => {
 
 /** Route */
 router.use('/books', bookRoutes);
+router.use('/user', userRoutes);
 
 /** Error Handling */
 router.use((req, res, next) => {
