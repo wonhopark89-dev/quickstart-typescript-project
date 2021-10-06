@@ -14,7 +14,7 @@ const BookSchema: Schema = new Schema(
 
 // pre, post
 BookSchema.post<IBook>('save', function () {
-  this.extraInformatino = 'This is some extra info we want to put onto this entry after the save!';
+  this.extraInformation = 'This is some extra info we want to put onto this entry after the save!';
 });
 
 export default mongoose.model<IBook>('Book', BookSchema);
